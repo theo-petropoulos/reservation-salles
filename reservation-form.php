@@ -116,6 +116,7 @@
 				echo "Vous devez être connecté pour accéder à cette page.<br>"?>
 				<a href="connexion.php">Connexion</a><br><a href="index.php">Accueil</a><?php
 			}
+			
 		$connect->close();
 		?>
 
