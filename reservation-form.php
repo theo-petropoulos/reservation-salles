@@ -57,19 +57,59 @@
 					return 0;
 				}
 				else{
-					return 1;
+					unset($date['debut_day'], $date['debut_time'], $date['fin_day'], $date['fin_time']);
+					return $date;
 				}
 			}
 		}
 	}
 
 	if(isset($_POST) && $_POST){
-		if(verify_date($_POST)){
-			echo "C'est inséré<br>";
+		$date=verify_date($_POST);
+		$debut=$date['debut'];
+		$fin=$date['fin'];
+
+		if($date){
+			$login=$_SESSION['user']['login'];
+			$id=mysqli_fetch_assoc($connect->query("SELECT `id` FROM `utilisateurs` WHERE `login`='$login'"));
+			$db_users=$connect->query("
+				SELECT id_utilisateur, 
+				DATE_FORMAT(`debut`, '%H:%i') AS 'debut_tm', 
+				DATE_FORMAT(`fin`, '%H:%i') AS 'fin_tm'
+				FROM `reservations` 
+				WHERE DATE(debut)=DATE('$debut')");
+
+			for($i=0;$i<mysqli_num_rows($db_users);$i++){
+				$db_val=mysqli_fetch_assoc($db_users);
+				$debut=strtotime($debut);
+				$fin=strtotime($fin);
+
+				if($id['id']==$db_val['id_utilisateur']){
+					echo "Vous avez déjà effectué une réservation ce jour. Retour à l'";?><a href="index.php">Accueil</a><?php echo ".";
+					exit();
+				}
+
+				else if(in_array(strtotime($db_val['debut_tm'] ), range($debut, $fin) ) ||
+						in_array(strtotime($db_val['fin_tm'] ), range($debut, $fin) ) )
+				{
+					echo "Une réservation existe déjà sur ce créneau. Veuillez "?><a href="reservation-form.php">Réessayer</a><?php echo ".";
+					exit();
+				}
+
+			}
+
+			$stmt=$connect->prepare("INSERT INTO `reservations` (titre, description, debut, fin, id_utilisateur) VALUES (?,?,?,?,?)");
+			$stmt->bind_param("ssssi", $date['titre'], $date['description'], $date['debut'], $date['fin'], $id['id']);
+			$stmt->execute();
+			echo "Votre réservation a bien été enregistrée. Retour à l'"?><a href="index.php">Accueil</a><?php echo ".";
+			exit();
 		}
+		
 		else{
-			echo "ca foire<br>";
+			echo "Il y a eut une erreur. Veuillez "?><a href="reservation-form.php">Réessayer</a><?php echo ".";
+			exit();
 		}
+
 	}
 
 ?>
@@ -82,34 +122,44 @@
 		<title>Réserver une salle</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="discussion.css?v=<?php echo time(); ?>">
+		<link rel="stylesheet" type='text/css' href="salles.php?v=<?php echo time(); ?>">
 		<script src="https://kit.fontawesome.com/9ddb75d515.js" crossorigin="anonymous"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet"> 
 	</head>
 
 	<body>
 
 		<?php 
-			if(isset($_SESSION['login']) && $_SESSION['login']){?>
+			if(isset($_SESSION['user']['login']) && $_SESSION['user']['login']){
 
-				<form method="post" action="reservation-form.php">
-					<h3>Du lundi au vendredi<br>De 08h00 à 19h00</h3><br>
-					<h4>Créneau minimum : 30 minutes<br>Créneau maximum : 4 heures</h4><br>
-					<label for="titre">Titre :</label>
-					<input type="text" name="titre" id="titre" placeholder="Ex: Cours d'anglais" pattern="[\w \?:\.;\(\)/_\-]{2,255}" required><br>
-					<label for="description">Description :</label>
-					<input type="text" name="description" id="description" placeholder="Ex: Groupes 1 à 6" pattern="[\w \?:\.;\(\)/_\-]{2,255}"><br>
-					<label for="debut_day">Début :</label>
-					<input type="date" name="debut_day" id="debut_day" min="<?php echo $local['DAY']?>" required> 
-					<input type="time" name="debut_time" id="debut_time" min="08:00" max="19:00" required><br>
-					<label for="fin_day">Fin :</label>
-					<input type="date" name="fin_day" id="fin_day" min="<?php echo $local['DAY']?>" required> 
-					<input type="time" name="fin_time" id="fin_time" min="08:00" max="19:00" required><br>
-					<input type="submit" class="submit_button" value="Valider">
-				</form>
+				if(isset($_POST) && $_POST){?>
+					<a href="index.php">Accueil</a>
+					<?php
+				}
 
-				<a href="index.php">Accueil</a>
+				else{?>
 
-				<?php
+					<form method="post" action="reservation-form.php">
+						<h3>Du lundi au vendredi<br>De 08h00 à 19h00</h3><br>
+						<h4>Créneau minimum : 30 minutes<br>Créneau maximum : 4 heures</h4><br>
+						<label for="titre">Titre :</label>
+						<input type="text" name="titre" id="titre" placeholder="Ex: Cours d'anglais" 
+						pattern="[\w éèàçïÀÉÈÇ\?:\.;'\(\)/_\-]{2,255}" required><br>
+						<label for="description">Description :</label>
+						<input type="text" name="description" id="description" placeholder="Ex: Groupes 1 à 6" 
+						pattern="[\w éèàçïÀÉÈÇ\?:\.;'\(\)/_\-]{2,255}"><br>
+						<label for="debut_day">Début :</label>
+						<input type="date" name="debut_day" id="debut_day" min="<?php echo $local['DAY']?>" required> 
+						<input type="time" name="debut_time" id="debut_time" min="08:00" max="19:00" required><br>
+						<label for="fin_day">Fin :</label>
+						<input type="date" name="fin_day" id="fin_day" min="<?php echo $local['DAY']?>" required> 
+						<input type="time" name="fin_time" id="fin_time" min="08:00" max="19:00" required><br>
+						<input type="submit" class="submit_button" value="Valider">
+					</form>
+
+					<a href="index.php">Accueil</a>
+					<?php
+				}
 			}
 
 			else{
