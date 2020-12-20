@@ -5,8 +5,12 @@
 
 <style>
 
+.bug_dodge{
+}
+
 html{
-	text-align:center;
+	height:100vh;
+	width:100vw;
 }
 
 body{
@@ -15,38 +19,76 @@ body{
 	display:flex;
 	flex-direction: column;
 	justify-content: center;
+	align-items: center;
 	font-family:Syne, Courier;
+	position:relative;
+	width:100%;
+	height:100%;
+	background:#6386AA;
+}
+
+#block_right{
+	position:relative;
+	display:flex;
+	align-items:center;
+	justify-content: center;
+	flex-direction: column-reverse;
+	width:100%;
 }
 
 table{
-	align-self:center;
+	position:relative;
+	width:100%;
+	height:100%;
 	background: linear-gradient(0deg, rgba(214,231,241,0.6) 0%, rgba(120,171,222,1) 100%);
+	align-self:center;
 }
 
 tr{
 	display:flex;
 	justify-content: space-around;
+	width:100%;
+	position:relative;
 }
 
 tbody{
+	height:100%;
+	position:relative;
+}
+
+#th_hr{
+	margin-left:1%;
+}
+
+#tr_body{
+	height:100%;
+	position:relative;
+}
+
+#tr_body td{
+	height:100%;
+}
+
+thead{
+	display:flex;
+	height:15%;
+	align-items:center;
+	justify-content: center;
 }
 
 td{
-	width: <?php echo $width?>vw;
-	height:80vh;
+	width:100%;
+	position:relative;
 	display:flex;
 	flex-direction:column;
-	border:none;
 	padding:0;
-	border-right:3px solid grey;
+	border-right:3px solid;
+	border-image:linear-gradient(0deg, rgba(205,205,205,0) 0%, #7a7a7a 30%, #7a7a7a 70%, rgba(229,140,250,0) 100%);
+	border-image-slice:1;
 }
 
 td:last-child{
 	border-right:none;
-}
-
-#tr_hr{
-	margin-left:1%;
 }
 
 #col_time{
@@ -75,9 +117,24 @@ h4{
 	margin:0.3%;
 }
 
-#block_right{
-	display:flex;
-	flex-direction: column-reverse;
+#form_slot{
+	visibility: hidden;
+	opacity:0;
+	transition:all 0.8s ease-in;
+}
+
+#submit_slot{
+	transition:all 0.5s ease-in;
+	background:#8BBEF0;
+	border:none;
+	border-radius:10%;
+	font-family:'Syne', Courier;
+}
+
+#submit_slot:hover{
+	cursor:pointer;
+	background:#A1E3A1;
+	transition:all 0.3s ease-in;
 }
 
 #nav_buttons{
@@ -110,6 +167,10 @@ h4{
 }
 #ch_right_2{
 	animation:mv_right 2s 0s infinite linear;
+}
+
+footer{
+	position:relative;
 }
 
 @keyframes mv_left{
