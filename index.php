@@ -28,7 +28,6 @@
 		<a href="profil.php">Profil</a><br>
 		<a href="planning.php">Planning</a><br>
 		<a href="reservation-form.php">Réserver</a><br>
-		<a href="reservation.php">Réservation</a><br>
 		<form method="post" action="index.php"><input type="checkbox" hidden checked name="disconnect" id="disconnect">
 			<input type="submit" id="disconnect_button" value="Déconnecter"></form>
 	</body>
