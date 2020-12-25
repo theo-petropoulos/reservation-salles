@@ -13,7 +13,7 @@
 		<meta charset="UTF-8">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Geo&display=swap" rel="stylesheet"> 
-		<link rel="stylesheet" href="salles.css?v=<?php echo time(); ?>">
+		<link rel="stylesheet" href="../css/salles.php?v=<?php echo time(); ?>">
 		<script src="https://kit.fontawesome.com/9ddb75d515.js" crossorigin="anonymous"></script>
 	</head>
 
@@ -42,7 +42,7 @@
 						if($login==$user['login']){
 							if(password_verify($password, $user['password'])){
 								?><main class="err_connexion"><p><?php
-								echo "Vous êtes maintenant connecté. <br>";?><div id="back2index"><a href="index.php">Accueil</a></div>
+								echo "Vous êtes maintenant connecté. <br>";?><div id="back2index"><a href="../index.php">Accueil</a></div>
 								</p></main><?php
 								$_SESSION['user']=['login'=>$user['login'], 'password'=>$user['password']];
 								exit();
@@ -70,7 +70,7 @@
 					<input type="password" id="password" name="password" required>
 					<input type="submit" id="submit_button" value="Envoyer">
 				</form>
-				<div id="back2index"><p>Retour à l' <a href="index.php">Accueil</a></p></div>
+				<div id="back2index"><p>Retour à l' <a href="../index.php">Accueil</a></p></div>
 			</main>
 			<?php
 		}
@@ -79,7 +79,7 @@
 
 		else{
 			?><main class="err_connexion"><?php
-			echo "Vous êtes déjà connecté.<br>";?><div id="back2index"><p>Retour à l' <a href="index.php">Accueil</a>.</p></div></main><?php
+			echo "Vous êtes déjà connecté.<br>";?><div id="back2index"><p>Retour à l' <a href="../index.php">Accueil</a>.</p></div></main><?php
 		}
 		
 

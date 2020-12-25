@@ -35,7 +35,7 @@
 		<meta charset="UTF-8">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Geo&display=swap" rel="stylesheet"> 
-		<link rel="stylesheet" type='text/css' href="salles.php?v=<?php echo time(); ?>">
+		<link rel="stylesheet" type='text/css' href="../css/salles.php?v=<?php echo time(); ?>">
 		<script src="https://kit.fontawesome.com/9ddb75d515.js" crossorigin="anonymous"></script>
 		<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet"> 
 	</head>
@@ -58,7 +58,7 @@
 					<input type="password" id="password" name="password" placeholder="*****" required>
 					<input type="submit" id="submit_button" value="Envoyer">
 				</form>
-				<div id="back2index"><p>Retour à l'<a href="index.php">Accueil</a></p></div>
+				<div id="back2index"><p>Retour à l'<a href="../index.php">Accueil</a></p></div>
 			</main>
 			
 		<?php

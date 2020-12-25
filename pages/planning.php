@@ -43,7 +43,7 @@
 		<title>Accueil</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type='text/css' href="salles.php?v=<?php echo time(); ?>">
+		<link rel="stylesheet" type='text/css' href="../css/salles.php?v=<?php echo time(); ?>">
 		<script src="https://kit.fontawesome.com/9ddb75d515.js" crossorigin="anonymous"></script>
 		<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet"> 
 	</head>
@@ -213,7 +213,7 @@
 		</main>
 
 		<footer>
-			<a href="index.php">Accueil</a>
+			<a href="../index.php">Accueil</a>
 		</footer>
 
 		<?php

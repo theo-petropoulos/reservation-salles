@@ -14,7 +14,7 @@
 		<meta charset="UTF-8">
 		<link rel="preconnect" href="https://fonts.gstatic.com">
 		<link href="https://fonts.googleapis.com/css2?family=Geo&display=swap" rel="stylesheet"> 
-		<link rel="stylesheet" type='text/css' href="salles.php?v=<?php echo time(); ?>">
+		<link rel="stylesheet" type='text/css' href="../css/salles.php?v=<?php echo time(); ?>">
 		<script src="https://kit.fontawesome.com/9ddb75d515.js" crossorigin="anonymous"></script>
 		<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet"> 
 	</head>
@@ -23,7 +23,7 @@
 		<?php
 			if(isset($_SESSION['user']) && $_SESSION['user']['login'] && $_SESSION['user']['password']){
 				?><main id="deja_inscrit"><?php
-				echo "Vous êtes déjà inscrit.";?><div id="back2index"><p>Retour à <a href="index.php">l'Accueil</a>.</p></div><?php
+				echo "Vous êtes déjà inscrit.";?><div id="back2index"><p>Retour à <a href="../index.php">l'Accueil</a>.</p></div><?php
 				?></main><?php
 				exit();
 			}
@@ -62,7 +62,7 @@
 						$stmt->bind_param("ss", $login, $password);
 						$stmt->execute();
 						?><main class="succ_connexion"><?php
-						echo "Votre inscription a bien été enregistrée.";?><div id="back2index"><p>Retour à <a href="index.php">l'Accueil</a>.</p></div><?php 
+						echo "Votre inscription a bien été enregistrée.";?><div id="back2index"><p>Retour à <a href="../index.php">l'Accueil</a>.</p></div><?php 
 						?></main><?php
 
 						$_SESSION['user']=['login'=>$_POST['login'], 'password'=>$_POST['password']];
@@ -83,7 +83,7 @@
 				<input type="password" id="cpassword" name="cpassword" required>
 				<input type="submit" id="submit_button" value="Envoyer">
 			</form>
-			<div id="back2index"><p>Retour à l' <a href="index.php">Accueil</a></p></div>
+			<div id="back2index"><p>Retour à l' <a href="../index.php">Accueil</a></p></div>
 
 		</main>
 

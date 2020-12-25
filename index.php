@@ -17,17 +17,17 @@
 		<title>Accueil</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="UTF-8">
-		<link rel="stylesheet" type='text/css' href="salles.php?v=<?php echo time(); ?>">
+		<link rel="stylesheet" type='text/css' href="css/salles.php?v=<?php echo time(); ?>">
 		<script src="https://kit.fontawesome.com/9ddb75d515.js" crossorigin="anonymous"></script>
 		<link href="https://fonts.googleapis.com/css2?family=Syne&display=swap" rel="stylesheet"> 
 	</head>
 
 	<body>
-		<a href="inscription.php">Inscription</a><br>
-		<a href="connexion.php">Connexion</a><br>
-		<a href="profil.php">Profil</a><br>
-		<a href="planning.php">Planning</a><br>
-		<a href="reservation-form.php">Réserver</a><br>
+		<a href="pages/inscription.php">Inscription</a><br>
+		<a href="pages/connexion.php">Connexion</a><br>
+		<a href="pages/profil.php">Profil</a><br>
+		<a href="pages/planning.php">Planning</a><br>
+		<a href="pages/reservation-form.php">Réserver</a><br>
 		<form method="post" action="index.php"><input type="checkbox" hidden checked name="disconnect" id="disconnect">
 			<input type="submit" id="disconnect_button" value="Déconnecter"></form>
 	</body>
